@@ -10,18 +10,21 @@ public class TwoSortedFindKth {
         System.out.println(find(a, b, 6)); // 3
         System.out.println(find(a, b, 7)); // 4
         System.out.println(find(a, b, 8)); // 5
+        System.out.println();
         
         a = new int[]{1, 2, 3};
         b = new int[]{2, 4, 5, 6, 7, 8, 8, 9, 10, 10};
         System.out.println(find(a, b, 10)); // 8
         System.out.println(find(a, b, 3)); // 2
         System.out.println(find(a, b, 4)); // 3
+        System.out.println();
         
         a = new int[]{1, 2, 3};
         b = new int[]{4, 4, 5, 6, 7, 8, 8, 9, 10, 10};
         System.out.println(find(a, b, 10)); // 8
         System.out.println(find(a, b, 3)); // 3
         System.out.println(find(b, a, 5)); // 4
+        System.out.println();
     }
     
     // log(K)
@@ -64,7 +67,7 @@ public class TwoSortedFindKth {
             }
             
             // if a[ia] > b[ib+1], decrease ia, increase ib
-            int delta = ia / 2;
+            int delta = Math.min(ia, ib) / 2;
             if (delta == 0) {
                 delta = 1;
             }
@@ -73,13 +76,10 @@ public class TwoSortedFindKth {
         }
         
         if (ia < 0) {
-            return b[k-1];
+            return b[k - 1];
         }
         
-        if (ib >= b.length) {
-            return a[k-b.length-1];
-        }
-        
-        return -1;
+        // ib >= b.length
+        return a[k - b.length - 1];
     }
 }
