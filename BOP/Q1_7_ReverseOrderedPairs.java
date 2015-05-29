@@ -1,4 +1,6 @@
-public class Q1_7_ReverseOrdered {
+import java.util.Arrays;
+
+public class Q1_7_ReverseOrderedPairs {
     public static void main(String[] args) {
         int[] a = {3, 5, 2, 7, 1, 6};
         System.out.println(Arrays.toString(a));
