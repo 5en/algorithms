@@ -11,7 +11,7 @@ import java.util.Set;
 // p is from [M,N] and q is from [1,p-1], 
 // find all irreducible fractions of p/q.
 
-public class irreducibleFractions {
+public class IrreducibleFractions {
     public static void main(String[] args) {
         System.out.println(findFracs(1, 4));
     }

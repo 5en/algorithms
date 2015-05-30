@@ -60,12 +60,32 @@ public class Segregate0s1s {
             }
 
             // a[left] == 1 && a[right] == 0
-            if (left < right) {
-                result[left++] = 0;
-                result[right--] = 1;
-            }
+            result[left++] = 0;
+            result[right--] = 1;
         }
 
         return result;
+    }
+    
+    // O(N), traverse the array once, in place
+    public static void segregate3(int[] a) {
+        int left = 0;
+        int right = a.length - 1;
+        
+        while (left <= right) {
+            if (a[left] == 0) {
+                left++;
+                continue;
+            }
+            
+            if (a[right] == 1) {
+                right--;
+                continue;
+            }
+            
+            // a[left] == 1 && a[right] == 0
+            a[left++] = 0;
+            a[right--] = 1;
+        }
     }
 }
