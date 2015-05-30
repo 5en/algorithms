@@ -2,10 +2,17 @@
 
 public class MaxProductContiguousSubArray {
     public static void main(String[] args) {
-        System.out.println(maxProduct(new int[]{-4, -3, -2})); // (-4) * (-3) = 12
+        System.out.println(maxProduct(new int[]{-2, -4, -3})); // (-4) * (-3) = 12
+        System.out.println(maxProduct2(new int[]{-2, -4, -3})); // (-4) * (-3) = 12
+        
         System.out.println(maxProduct(new int[]{-1, 0, -2})); // 0
+        System.out.println(maxProduct2(new int[]{-1, 0, -2})); // 0
+        
         System.out.println(maxProduct(new int[]{-1})); // -1
+        System.out.println(maxProduct2(new int[]{-1})); // -1
+        
         System.out.println(maxProduct(new int[]{1})); // 1
+        System.out.println(maxProduct2(new int[]{1})); // 1
     }
     
     public static int maxProduct(int[] A) {
@@ -32,6 +39,23 @@ public class MaxProductContiguousSubArray {
                 max = Math.max(max, maxTailPos);
             }
             max = Math.max(max, A[i]);
+        }
+        
+        return max;
+    }
+
+    // https://leetcode.com/problems/maximum-product-subarray/solution/
+    public static int maxProduct2(int[] A) {
+        int max = A[0];
+        int contMax = A[0];
+        int contMin = A[0];
+        
+        for (int i = 1; i < A.length; i++) {
+            int oldMax = contMax;
+            int oldMin = contMin;
+            contMax = Math.max(A[i], Math.max(oldMax * A[i], oldMin * A[i]));
+            contMin = Math.min(A[i], Math.min(oldMax * A[i], oldMin * A[i]));
+            max = Math.max(max, contMax);
         }
         
         return max;
