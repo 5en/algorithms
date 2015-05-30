@@ -1,10 +1,4 @@
 // https://oj.leetcode.com/problems/word-search/
-// Given a 2D board and a word, find if the word exists in the grid.
-// The word can be constructed from letters of sequentially adjacent cell,
-// where "adjacent" cells are those horizontally or vertically neighboring.
-// The same letter cell may not be used more than once.
-
-package dfs;
 
 public class WordSearch {
     public static void main(String[] args) {
@@ -12,19 +6,18 @@ public class WordSearch {
         // SFCS
         // ADEE
         char[][] board = {{'A', 'B', 'C', 'E'}, {'S', 'F', 'C', 'S'}, {'A', 'D', 'E', 'E'}};
-        System.out.println(exist(board, "ABCCED"));
-        System.out.println(exist(board, "SEE"));
-        System.out.println(exist(board, "ABCB"));
+        System.out.println(exist(board, "ABCCED")); // true
+        System.out.println(exist(board, "SEE")); // true
+        System.out.println(exist(board, "ABCB")); // false
     }
 
     public static boolean exist(char[][] board, String word) {
         int M = board.length;
         int N = board[0].length;
-        boolean[][] visited = new boolean[M][N];
         
         for (int x = 0; x < M; x++) {
             for (int y = 0; y < N; y++) {
-                if (board[x][y] == word.charAt(0) && search(board, word, 0, x, y, visited)) {
+                if (search(board, word, 0, x, y)) {
                     return true;
                 }
             }
@@ -33,31 +26,25 @@ public class WordSearch {
         return false;
     }
     
-    private static boolean search (char[][] board, String word, int idx, int x, int y, boolean[][] visited) {
+    private static boolean search (char[][] board, String word, int idx, int x, int y) {
         if (idx == word.length()) {
             return true;
         }
         
-        if (x < 0 || x >= board.length || y < 0 || y >= board[0].length) {
+        if (x < 0 || x >= board.length || y < 0 || y >= board[0].length || board[x][y] == ' ' || board[x][y] != word.charAt(idx)) {
             return false;
         }
         
-        if (!visited[x][y] && board[x][y] == word.charAt(idx)) {
-            visited[x][y] = true;
-            if (search(board, word, idx+1, x+1, y, visited)) {
-                return true;
-            }
-            if (search(board, word, idx+1, x-1, y, visited)) {
-                return true;
-            }
-            if (search(board, word, idx+1, x, y+1, visited)) {
-                return true;
-            }
-            if (search(board, word, idx+1, x, y-1, visited)) {
-                return true;
-            }
-            visited[x][y] = false; // back track
+        char tmp = board[x][y];
+        board[x][y] = ' ';
+        if (search(board, word, idx+1, x+1, y) || 
+                search(board, word, idx+1, x-1, y) ||
+                search(board, word, idx+1, x, y+1) ||
+                search(board, word, idx+1, x, y-1)) {
+            board[x][y] = tmp; // back track
+            return true;
         }
+        board[x][y] = tmp; // back track
         
         return false;
     }
