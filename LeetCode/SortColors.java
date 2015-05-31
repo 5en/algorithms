@@ -1,3 +1,5 @@
+// https://leetcode.com/problems/sort-colors/
+
 import java.util.Arrays;
 
 public class SortColors {
@@ -6,7 +8,7 @@ public class SortColors {
         sortColors(a1);
         System.out.println(Arrays.toString(a1));
         
-        int[] a2 = {2, 1, 0};
+        int[] a2 = {2, 2, 2};
         sortColors(a2);
         System.out.println(Arrays.toString(a2));
     }
