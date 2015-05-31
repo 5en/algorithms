@@ -1,1 +1,2 @@
 Code Jam Africa 2010 Qualification Round A. Store Credit
+LeetCode Search for a Range
