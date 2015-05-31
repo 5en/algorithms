@@ -1,8 +1,9 @@
-// find x in an shifted sorted array (with/without duplicates)
+// https://leetcode.com/problems/search-in-rotated-sorted-array/
+// https://leetcode.com/problems/search-in-rotated-sorted-array-ii/
 
 package bs;
 
-public class ShiftedSortedFind {
+public class SearchInRotatedSortedArray {
     public static void main(String[] args) {
         System.out.println(find(new int[]{6, 8, 10, 12, 14, 0, 2, 4}, 6)); // 0
         System.out.println(find(new int[]{6, 8, 10, 12, 14, 0, 2, 4}, 10)); // 2
@@ -15,8 +16,8 @@ public class ShiftedSortedFind {
         System.out.println(find(new int[]{6, 8, 10, 12, 14, 0, 2, 4}, 9)); // -1
         System.out.println(find(new int[]{6, 8, 10, 12, 14, 0, 2, 4}, 15)); // -1
         
-        System.out.println(find(new int[]{1, 1, 1, 3, 1}, 3)); // 1 (wrong)
-        System.out.println(find2(new int[]{1, 1, 1, 3, 1}, 3)); // 1
+        System.out.println(find(new int[]{1, 1, 1, 3, 1}, 3)); // -1 (wrong)
+        System.out.println(find2(new int[]{1, 1, 1, 3, 1}, 3)); // 3
     }
 
     // no duplicates in a
