@@ -10,7 +10,7 @@ public class MergeKSortedLists {
          ListNode(int x) { val = x; }
     }
     
-    public ListNode mergeKLists(ListNode[] lists) {
+    public static ListNode mergeKLists(ListNode[] lists) {
         PriorityQueue<ListNode> pq = new PriorityQueue<ListNode>(new Comparator<ListNode>(){
             @Override
             public int compare(ListNode n1, ListNode n2) {
