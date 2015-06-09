@@ -87,7 +87,7 @@ public class LongestCommonSubstring {
         return result;
     }
 
-    // O((M+N)^2) time, O(M+N) space
+    // O((M+N)^2) time, O(M^2+N^2) space
     // sort suffixes and compare neighbors
     public static Set<String> lcs3(String s1, String s2) {
         List<Suffix> suffixes = new ArrayList<Suffix>(s1.length() + s2.length());
