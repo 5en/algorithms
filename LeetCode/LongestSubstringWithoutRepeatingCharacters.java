@@ -5,7 +5,7 @@ import java.util.Map;
 
 public class LongestSubstringWithoutRepeatingCharacters {
     // O(N) time, O(N) space
-    public int lengthOfLongestSubstringWithoutRepeatingCharacters(String s) {
+    public static int lengthOfLongestSubstringWithoutRepeatingCharacters(String s) {
         int maxLen = 0;
         int currLen = 0;
         int start = 0;
