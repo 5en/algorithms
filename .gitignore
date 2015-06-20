@@ -1,2 +1,5 @@
+# IntelliJ IDEA
+.idea/workspace.xml
+
 # Compiled files
 **/bin/
