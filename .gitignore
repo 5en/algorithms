@@ -1,5 +1,6 @@
 # Eclipse
 bin/
+build/
 .settings/
 .project
 .classpath
@@ -8,6 +9,3 @@ bin/
 .idea/
 out/
 *.iml
-
-# Compiled files
-bin/
