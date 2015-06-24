@@ -4,12 +4,6 @@ import java.util.Comparator;
 import java.util.PriorityQueue;
 
 public class MergeKSortedLists {
-    public static class ListNode {
-         int val;
-         ListNode next;
-         ListNode(int x) { val = x; }
-    }
-    
     public static ListNode mergeKLists(ListNode[] lists) {
         PriorityQueue<ListNode> pq = new PriorityQueue<ListNode>(new Comparator<ListNode>(){
             @Override
@@ -41,5 +35,11 @@ public class MergeKSortedLists {
         }
         
         return head;
+    }
+
+    private static class ListNode {
+        int val;
+        ListNode next;
+        ListNode(int x) { val = x; }
     }
 }

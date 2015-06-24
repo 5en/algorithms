@@ -1,12 +1,6 @@
 // https://leetcode.com/problems/reverse-nodes-in-k-group/
 
 public class ReverseNodesInKGroup {
-    public static class ListNode {
-        int val;
-        ListNode next;
-        ListNode(int x) { val = x; }
-    }
-    
     public static ListNode reverseKGroup(ListNode head, int k) {
         ListNode curr = head;
         for (int i = 1; i <= k; i++) {
@@ -28,5 +22,11 @@ public class ReverseNodesInKGroup {
         curr.next = reverseKGroup(curr.next, k);
         
         return resultHead;
+    }
+
+    private static class ListNode {
+        int val;
+        ListNode next;
+        ListNode(int x) { val = x; }
     }
 }

@@ -46,8 +46,7 @@ public class IntersectionOfTwoLinkedLists {
     private static class ListNode {
         int val;
         ListNode next;
-
-        public ListNode(int x) {
+        ListNode(int x) {
             val = x;
             next = null;
         }
