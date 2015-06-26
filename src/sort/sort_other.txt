@@ -9,4 +9,4 @@ Works Applications 2014 Segregate0s1s
 LeetCode Sort Colors
 LeetCode Merge Sorted Array
 LeetCode 3Sum
-LeetCode 3Sum Closest 
+LeetCode 3Sum Closest
