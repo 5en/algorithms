@@ -1,53 +1,45 @@
 // https://leetcode.com/problems/combination-sum/
 
-import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.LinkedList;
 import java.util.List;
 
 public class CombinationSum {
+    public static void main(String[] args) {
+        System.out.println(combinationSum(new int[]{1, 2}, 2));
+    }
+
     public static List<List<Integer>> combinationSum(int[] candidates, int target) {
         Arrays.sort(candidates);
-        return combinationSumSub(candidates, 0, target);
+        List<List<Integer>> combs = new LinkedList<List<Integer>>();
+        List<Integer> comb = new LinkedList<Integer>();
+        combinationSumSub(candidates, 0, target, combs, comb);
+
+        return combs;
     }
 
     // Input is candidates[start], ..., candidates[candidates.length - 1]
-    private static List<List<Integer>> combinationSumSub(int[] candidates, int start, int target) {
-        List<List<Integer>> combs = new LinkedList<List<Integer>>();
-
-        if (start == candidates.length - 1) {
-            if (target % candidates[start] == 0) {
-                List<Integer> comb = new ArrayList<Integer>();
-                for (int i = 0; i < target / candidates[start]; i++) {
-                    comb.add(candidates[start]);
-                }
-                combs.add(comb);
-            }
-
-            return combs;
+    private static void combinationSumSub(int[] candidates, int start, int target, List<List<Integer>> combs, List<Integer> comb) {
+        if (target == 0) {
+            combs.add(new LinkedList<Integer>(comb));
+            return;
         }
 
-        for (int i = 0; candidates[start] * i <= target; i++) {
-            if (candidates[start] * i == target) {
-                List<Integer> comb = new ArrayList<Integer>();
-                for (int j = 0; j < i; j++) {
-                    comb.add(candidates[start]);
-                }
-                combs.add(comb);
-                continue;
-            }
-
-            List<List<Integer>> subCombs = combinationSumSub(candidates, start + 1, target - i * candidates[start]);
-            if (!subCombs.isEmpty()) {
-                for(List<Integer> subComb : subCombs) {
-                    for (int j = 0; j < i; j++) {
-                        subComb.add(0, candidates[start]);
-                    }
-                }
-                combs.addAll(subCombs);
-            }
+        if (start >= candidates.length) {
+            return;
         }
 
-        return combs;
+        for (int multi = 0; candidates[start] * multi <= target; multi++) {
+            for (int i = 0; i < multi; i++) {
+                comb.add(candidates[start]);
+            }
+
+            combinationSumSub(candidates, start + 1, target - multi * candidates[start], combs, comb);
+
+            // backtrack
+            for (int i = 0; i < multi; i++) {
+                comb.remove(comb.size() - 1);
+            }
+        }
     }
 }
