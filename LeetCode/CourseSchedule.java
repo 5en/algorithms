@@ -1,3 +1,5 @@
+// https://leetcode.com/problems/course-schedule/
+
 import java.util.HashMap;
 import java.util.HashSet;
 import java.util.LinkedList;
@@ -7,17 +9,14 @@ import java.util.Random;
 import java.util.Set;
 
 public class CourseSchedule {
-    public boolean canFinish(int numCourses, int[][] prerequisites) {
+    public static boolean canFinish(int numCourses, int[][] prerequisites) {
         Map<Integer, Vertex> label2Vertex = new HashMap<Integer, Vertex>();
+        for (int i = 0; i < numCourses; i++) {
+            label2Vertex.put(i, new Vertex());
+        }
         for (int[] prerequisite : prerequisites) {
             int from = prerequisite[0];
-            if (!label2Vertex.containsKey(from)) {
-                label2Vertex.put(from, new Vertex());
-            }
             int to = prerequisite[1];
-            if (!label2Vertex.containsKey(to)) {
-                label2Vertex.put(to, new Vertex());
-            }
             label2Vertex.get(from).adjs.add(label2Vertex.get(to));
         }
 
