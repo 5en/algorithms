@@ -1,7 +1,7 @@
 package graph;
 
-import java.util.Collections;
-import java.util.Comparator;
+import graph.Vertex.Color;
+
 import java.util.LinkedList;
 import java.util.List;
 
@@ -19,18 +19,18 @@ public class ToplogicalSort {
 
         shirt.adjs.put(tie, null);
         shirt.adjs.put(belt, null);
-
         tie.adjs.put(jacket, null);
-
         belt.adjs.put(jacket, null);
-
         undershorts.adjs.put(pants, null);
         undershorts.adjs.put(shoes, null);
-
         pants.adjs.put(belt, null);
         pants.adjs.put(shoes, null);
-
         socks.adjs.put(shoes, null);
+        
+        // cycle
+//        shirt.adjs.put(tie, null);
+//        tie.adjs.put(jacket, null);
+//        jacket.adjs.put(shirt, null);
 
         List<Vertex> graph = new LinkedList<Vertex>();
         graph.add(shirt);
@@ -43,23 +43,37 @@ public class ToplogicalSort {
         graph.add(socks);
         graph.add(shoes);
 
-        tps(graph);
+        System.out.println(tps(graph));
     }
 
-    public static void tps(List<Vertex> graph) {
+    public static List<Vertex> tps(List<Vertex> graph) {
+        List<Vertex> order = new LinkedList<Vertex>();
         for (Vertex v : graph) {
-            DFS.dfs(v);
-        }
-
-        Collections.sort(graph, new Comparator<Vertex>() {
-            @Override
-            public int compare(Vertex v1, Vertex v2) {
-                return v1.f >= v2.f ? -1 : 1;
+            if (dfs(v, order) == false) {
+                return new LinkedList<Vertex>();
             }
-        });
-
-        for (Vertex v : graph) {
-            System.out.println(v.data + " " + v.d + "/" + v.f);
         }
+        
+        return order;
+    }
+    
+    private static boolean dfs(Vertex v, List<Vertex> order) {
+        if (v.color == Color.GRAY) {
+            return false;
+        }
+        if (v.color == Color.BALCK) {
+            return true;
+        }
+        
+        v.color = Color.GRAY;
+        for (Vertex adj : v.adjs.keySet()) {
+            if (dfs(adj, order) == false) {
+                return false;
+            }
+        }
+        v.color = Color.BALCK;
+        order.add(0, v);
+        
+        return true;
     }
 }
