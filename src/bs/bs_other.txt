@@ -2,3 +2,4 @@ Code Jam Africa 2010 Qualification Round A. Store Credit
 LeetCode Search for a Range
 LeetCode Median of Two Sorted Arrays
 LeetCode Count Complete Tree Nodes
+LeetCode Minimum Size Subarray Sum
