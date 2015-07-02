@@ -15,8 +15,8 @@ public class CourseSchedule {
             label2Vertex.put(i, new Vertex());
         }
         for (int[] prerequisite : prerequisites) {
-            int from = prerequisite[0];
-            int to = prerequisite[1];
+            int from = prerequisite[1]; // prerequisite
+            int to = prerequisite[0];
             label2Vertex.get(from).adjs.add(label2Vertex.get(to));
         }
 
