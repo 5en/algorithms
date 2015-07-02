@@ -7,3 +7,4 @@ LeetCode Word Search
 LeetCode Combination Sum
 LeetCode Combination Sum II
 LeetCode Combination Sum III
+LeetCode Number of Islands
