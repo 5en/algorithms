@@ -7,7 +7,7 @@ import java.util.Map;
 
 public class RepeatedDnaSequences {
     // worst case O((N-L+1)*L*L)
-    public List<String> findRepeatedDnaSequences(String s) {
+    public static List<String> findRepeatedDnaSequences(String s) {
         int L = 10;
         List<String> result = new LinkedList<String>();
 
