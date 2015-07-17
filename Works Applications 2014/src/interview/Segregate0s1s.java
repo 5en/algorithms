@@ -13,8 +13,14 @@ public class Segregate0s1s {
         System.out.println(Arrays.toString(segregate2(new int[]{1, 0, 0, 1, 1, 0, 1})));
         System.out.println(Arrays.toString(segregate2(new int[]{0, 0, 0, 0, 0, 0, 0})));
         System.out.println(Arrays.toString(segregate2(new int[]{1, 1, 1, 1, 1, 1, 1})));
-        System.out.println(Arrays.toString(segregate1(new int[]{0})));
-        System.out.println(Arrays.toString(segregate1(new int[]{1})));
+        System.out.println(Arrays.toString(segregate2(new int[]{0})));
+        System.out.println(Arrays.toString(segregate2(new int[]{1})));
+        System.out.println();
+        System.out.println(Arrays.toString(segregate3(new int[]{1, 0, 0, 1, 1, 0, 1})));
+        System.out.println(Arrays.toString(segregate3(new int[]{0, 0, 0, 0, 0, 0, 0})));
+        System.out.println(Arrays.toString(segregate3(new int[]{1, 1, 1, 1, 1, 1, 1})));
+        System.out.println(Arrays.toString(segregate3(new int[]{0})));
+        System.out.println(Arrays.toString(segregate3(new int[]{1})));
     }
 
     // O(N), traverse the array twice
@@ -68,24 +74,21 @@ public class Segregate0s1s {
     }
     
     // O(N), traverse the array once, in place
-    public static void segregate3(int[] a) {
-        int left = 0;
-        int right = a.length - 1;
+    public static int[] segregate3(int[] a) {
+        // a[0...partition-1] = 0
+        // a[partition...a.length-1] = 1
+        int partition = 0;
         
-        while (left <= right) {
-            if (a[left] == 0) {
-                left++;
-                continue;
+        for (int i = 0; i < a.length; i++) {
+            if (a[i] == 0) {
+                // swap a[partition] with a[i], partition++
+                int tmp = a[partition];
+                a[partition] = a[i];
+                a[i] = tmp;
+                partition++;
             }
-            
-            if (a[right] == 1) {
-                right--;
-                continue;
-            }
-            
-            // a[left] == 1 && a[right] == 0
-            a[left++] = 0;
-            a[right--] = 1;
         }
+
+        return a;
     }
 }
