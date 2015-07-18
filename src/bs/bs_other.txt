@@ -4,3 +4,5 @@ LeetCode Median of Two Sorted Arrays
 LeetCode Count Complete Tree Nodes
 LeetCode Minimum Size Subarray Sum
 LeetCode Find Peak Element
+LeetCode Find Minimum in Rotated Sorted Array
+LeetCode Search in Rotated Sorted Array (II)
