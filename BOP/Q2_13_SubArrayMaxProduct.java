@@ -9,29 +9,77 @@ public class Q2_13_SubArrayMaxProduct {
         List<Integer> ints = new ArrayList<Integer>(Arrays.asList(0, 0, 10, -5, 4, 5));
         maxProduct(ints);
         System.out.println(ints);
+        ints = new ArrayList<Integer>(Arrays.asList(0, 0, 10, -5, 4, 5));
+        maxProduct2(ints);
+        System.out.println(ints);
 
         ints = new ArrayList<Integer>(Arrays.asList(0, 10, -5, 4, 5, -1));
         maxProduct(ints);
+        System.out.println(ints);
+        ints = new ArrayList<Integer>(Arrays.asList(0, 10, -5, 4, 5, -1));
+        maxProduct2(ints);
         System.out.println(ints);
 
         ints = new ArrayList<Integer>(Arrays.asList(0, 10, -5, 4, 5, -1, -2));
         maxProduct(ints);
         System.out.println(ints);
+        ints = new ArrayList<Integer>(Arrays.asList(0, 10, -5, 4, 5, -1, -2));
+        maxProduct2(ints);
+        System.out.println(ints);
 
         ints = new ArrayList<Integer>(Arrays.asList(10, -5, 4, 5, -1));
         maxProduct(ints);
+        System.out.println(ints);
+        ints = new ArrayList<Integer>(Arrays.asList(10, -5, 4, 5, -1));
+        maxProduct2(ints);
         System.out.println(ints);
 
         ints = new ArrayList<Integer>(Arrays.asList(-5, -1));
         maxProduct(ints);
         System.out.println(ints);
+        ints = new ArrayList<Integer>(Arrays.asList(-5, -1));
+        maxProduct2(ints);
+        System.out.println(ints);
 
         ints = new ArrayList<Integer>(Arrays.asList(10, -5, 4, 5, -1, -2));
         maxProduct(ints);
         System.out.println(ints);
+        ints = new ArrayList<Integer>(Arrays.asList(10, -5, 4, 5, -1, -2));
+        maxProduct2(ints);
+        System.out.println(ints);
     }
 
+    // O(N)
     public static void maxProduct(List<Integer> ints) {
+        int N = ints.size();
+
+        int[] head = new int[N+1]; // head[n] = ints[0] * ... * ints[n-1], head[0] = 1 (product of first n elements)
+        head[0] = 1;
+        for (int n = 1; n <= N; n++) {
+            head[n] = head[n-1] * ints.get(n-1);
+        }
+
+        int[] tail = new int[N+1]; // tail[n] = ints[N-n] * ... * ints[N-1], tail[0] = 1 (product of last n elements)
+        tail[0] = 1;
+        for (int n = 1; n <= N; n++) {
+            tail[n] = tail[n-1] * ints.get(N-n);
+        }
+
+        // if ints[i] is ignored, result = head[i] * tail[N-i-1]
+        int maxProduct = head[0] * tail[N-1];
+        int targetI = 0;
+        for (int i = 1; i < N; i++) {
+            int product = head[i] * tail[N-i-1];
+            if (product > maxProduct) {
+                maxProduct = product;
+                targetI = i;
+            }
+        }
+
+        ints.remove(targetI);
+    }
+
+    public static void maxProduct2(List<Integer> ints) {
         if (ints.size() < 2) {
             throw new RuntimeException("size must be >= 2");
         }
