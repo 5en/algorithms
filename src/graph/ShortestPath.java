@@ -28,7 +28,7 @@ public class ShortestPath {
         E.add(new Edge(VMap.get("z"), VMap.get("x"), 6));
 
         System.out.println("Dijkstra");
-        //dijkstra(new HashSet<Vertex>(VMap.values()), E, VMap.get("s"));
+        dijkstra(new HashSet<Vertex>(VMap.values()), VMap.get("s"));
 
         System.out.println();
 
@@ -113,7 +113,7 @@ public class ShortestPath {
     }
 
     // O(|E| + |V|*log|V|)
-    public static void dijkstra(Set<Vertex> V, Set<Edge> E, Vertex from) {
+    public static void dijkstra(Set<Vertex> V, Vertex from) {
         from.dist = 0;
         from.prev = null;
 
