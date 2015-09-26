@@ -119,7 +119,7 @@ public class MST {
         root.prev = null;
 
         // min-heap
-        PriorityQueue<Vertex> Q = new PriorityQueue<Vertex>(new Comparator<Vertex>() {
+        PriorityQueue<Vertex> Q = new PriorityQueue<Vertex>(V.size(), new Comparator<Vertex>() {
             @Override
             public int compare(Vertex v1, Vertex v2) {
                 return v1.dist < v2.dist ? -1 : (v1.dist > v2.dist ? 1 : 0);

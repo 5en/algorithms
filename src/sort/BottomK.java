@@ -7,11 +7,11 @@ import java.util.Random;
 public class BottomK {
     public static void main(String[] args) {
         // 3, 10, 23, 28, [32], 55, 65, 123, 505, 567 
-        int[] a = {10, 3, 567, 23, 65, 55, 28, 123, 505, 32};
+        int[] a = { 10, 3, 567, 23, 65, 55, 28, 123, 505, 32 };
         System.out.println(a[bottomK(a, 5, 0, a.length - 1)]);
-        int[] b = {10, 3, 567, 23, 65, 55, 28, 123, 505, 32};
+        int[] b = { 10, 3, 567, 23, 65, 55, 28, 123, 505, 32 };
         System.out.println(bottomK2(b, 5, 0, a.length - 1));
-        int[] c = {10, 3, 567, 23, 65, 55, 28, 123, 505, 32};
+        int[] c = { 10, 3, 567, 23, 65, 55, 28, 123, 505, 32 };
         System.out.println(bottomK3(c, 5));
     }
 
@@ -39,7 +39,8 @@ public class BottomK {
         }
 
         // median of medians, used as the pivot
-        int pivotIdx = mi2ai[bottomK(medians, (int) Math.ceil(((double) medians.length) / 2), 0, medians.length - 1)];
+        int pivotIdx = mi2ai[bottomK(medians, (int) Math.ceil(((double) medians.length) / 2), 0,
+            medians.length - 1)];
         pivotIdx = partition(a, pivotIdx, left, right);
 
         // recursion
@@ -134,7 +135,7 @@ public class BottomK {
     // O(N*logK), scan every element only once
     // keep a max-heap storing the K smallest elements
     public static int bottomK3(int[] a, int k) {
-        PriorityQueue<Integer> pq = new PriorityQueue<Integer>(Collections.reverseOrder()); // max-heap
+        PriorityQueue<Integer> pq = new PriorityQueue<Integer>(k, Collections.reverseOrder()); // max-heap
 
         for (int i = 0; i < k; i++) {
             pq.add(a[i]);
