@@ -1,7 +1,7 @@
 package tree;
 
-import java.util.List;
 import java.util.LinkedList;
+import java.util.List;
 
 public class FindNumNodes {
     public static void main(String[] args) {

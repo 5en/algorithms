@@ -14,7 +14,7 @@ public class SubsetSum {
         System.out.println(find(A, 3, 7));
         System.out.println(find(A, 4, 7));
     }
-    
+
     // O(N*k*s), N is the # of elements in A
     // find(A, k, s) = find(A-{a}, k, s) union find(A-{a}, k-1, s-a)
     public static Set<List<Integer>> find(List<Integer> A, int k, int s) {
@@ -37,14 +37,14 @@ public class SubsetSum {
         Set<List<Integer>> result = new HashSet<List<Integer>>();
         int a = A.get(0);
         A.remove(0);
-        
+
         // does not include a:
         Set<List<Integer>> r1 = find(A, k, s);
         if (r1 != null) {
             result.addAll(r1);
         }
         // include a:
-        Set<List<Integer>> r2 = find(A, k-1, s-a);
+        Set<List<Integer>> r2 = find(A, k - 1, s - a);
         if (r2 != null) {
             for (List<Integer> subset : r2) {
                 List<Integer> newSubset = new LinkedList<Integer>(subset);

@@ -26,11 +26,11 @@ public class ToplogicalSort {
         pants.adjs.put(belt, null);
         pants.adjs.put(shoes, null);
         socks.adjs.put(shoes, null);
-        
+
         // cycle
-//        shirt.adjs.put(tie, null);
-//        tie.adjs.put(jacket, null);
-//        jacket.adjs.put(shirt, null);
+        //        shirt.adjs.put(tie, null);
+        //        tie.adjs.put(jacket, null);
+        //        jacket.adjs.put(shirt, null);
 
         List<Vertex> graph = new LinkedList<Vertex>();
         graph.add(shirt);
@@ -53,10 +53,10 @@ public class ToplogicalSort {
                 return new LinkedList<Vertex>();
             }
         }
-        
+
         return order;
     }
-    
+
     private static boolean dfs(Vertex v, List<Vertex> order) {
         if (v.color == Color.GRAY) {
             return false;
@@ -64,7 +64,7 @@ public class ToplogicalSort {
         if (v.color == Color.BALCK) {
             return true;
         }
-        
+
         v.color = Color.GRAY;
         for (Vertex adj : v.adjs.keySet()) {
             if (dfs(adj, order) == false) {
@@ -73,7 +73,7 @@ public class ToplogicalSort {
         }
         v.color = Color.BALCK;
         order.add(0, v);
-        
+
         return true;
     }
 }

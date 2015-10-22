@@ -6,7 +6,7 @@ public class ConvertParlindrome {
     public static void main(String[] args) {
         System.out.println(convert("abcd"));
         System.out.println(convert2("abcd"));
-        
+
         System.out.println(convert("abcbd"));
         System.out.println(convert2("abcbd"));
     }
@@ -106,7 +106,7 @@ public class ConvertParlindrome {
         if (s1.length() == 0 || s2.length() == 0) {
             return s1.length() == 0 ? s2.length() : s1.length();
         }
-        
+
         int M = s1.length();
         int N = s2.length();
 
@@ -120,19 +120,19 @@ public class ConvertParlindrome {
         for (int i = 1; i < M; i++) {
             for (int j = 1; j < N; j++) {
                 if (s1.charAt(i) == s2.charAt(j)) {
-                    diff[i][j] = diff[i-1][j-1];
+                    diff[i][j] = diff[i - 1][j - 1];
                 } else {
-                    int diff1 = 1 + diff[i-1][j-1];
-                    int diff2 = 1 + diff[i][j-1];
-                    int diff3 = 1 + diff[i-1][j];
+                    int diff1 = 1 + diff[i - 1][j - 1];
+                    int diff2 = 1 + diff[i][j - 1];
+                    int diff3 = 1 + diff[i - 1][j];
                     diff[i][j] = min(diff1, diff2, diff3);
                 }
             }
         }
-        
-        return diff[M-1][N-1];
+
+        return diff[M - 1][N - 1];
     }
-    
+
     private static int min(int... a) {
         int min = Integer.MAX_VALUE;
 
