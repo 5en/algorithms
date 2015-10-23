@@ -8,7 +8,7 @@ import java.util.Queue;
 
 public class BucketSort {
     public static void main(String[] args) {
-        String[] strs = {"String", "string", "save", "test", "luck", "apple"};
+        String[] strs = { "String", "string", "save", "test", "luck", "apple" };
         System.out.println(Arrays.toString(strs));
         BucketSort.sort(strs);
         System.out.println(Arrays.toString(strs));

@@ -5,7 +5,7 @@ import java.util.Random;
 
 public class QuickSort {
     public static void main(String[] args) {
-        int[] a = {10, 3, 567, 23, 65, 55, 28, 123, 505, 32};
+        int[] a = { 10, 3, 567, 23, 65, 55, 28, 123, 505, 32 };
         System.out.println(Arrays.toString(a));
         QuickSort.sort(a);
         System.out.println(Arrays.toString(a));

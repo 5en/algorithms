@@ -8,8 +8,8 @@ import java.util.List;
 
 public class SumManhattanDistance {
     public static void main(String[] args) {
-        int[] x = {0, 1, 2, 3};
-        int[] y = {0, 1, 3, 2};
+        int[] x = { 0, 1, 2, 3 };
+        int[] y = { 0, 1, 3, 2 };
         int[] dists = sumDist(x, y);
         System.out.println(Arrays.toString(dists));
     }

@@ -145,8 +145,8 @@ public class LongestCommonSubstring {
 
     private static class Suffix {
         public final String s;
-        public final int start;
-        public final int id;
+        public final int    start;
+        public final int    id;
 
         public Suffix(String s, int start, int id) {
             this.s = s;

@@ -8,7 +8,8 @@ import java.util.Set;
 
 public class SubsetSum {
     public static void main(String[] args) {
-        List<Integer> A = new LinkedList<Integer>(Arrays.asList(new Integer[]{1, 2, 2, 3, 4, 5, 6, 7}));
+        List<Integer> A = new LinkedList<Integer>(Arrays.asList(new Integer[] { 1, 2, 2, 3, 4, 5,
+                6, 7 }));
         System.out.println(find(A, 1, 7));
         System.out.println(find(A, 2, 7));
         System.out.println(find(A, 3, 7));

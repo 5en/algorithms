@@ -45,7 +45,7 @@ public class FindNumNodes {
     }
 
     private static class Node {
-        public final int x;
+        public final int        x;
         public final List<Node> c = new LinkedList<Node>();
 
         public Node(int x) {
@@ -55,7 +55,7 @@ public class FindNumNodes {
 
     private static class Result {
         public final boolean same; // whether all the nodes in the subtree have the same value
-        public final int count; // # of nodes in the subtree whose value is the same as all of its descendants
+        public final int     count; // # of nodes in the subtree whose value is the same as all of its descendants
 
         public Result(boolean same, int count) {
             this.same = same;

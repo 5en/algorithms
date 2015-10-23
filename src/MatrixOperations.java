@@ -3,7 +3,7 @@ import java.util.Queue;
 
 public class MatrixOperations {
     public static void main(String[] args) {
-        int[][] m1 = {{1, 2, 3}, {4, 5, 6}};
+        int[][] m1 = { { 1, 2, 3 }, { 4, 5, 6 } };
         print(m1);
 
         System.out.println();
@@ -16,7 +16,8 @@ public class MatrixOperations {
 
         System.out.println();
 
-        char[][] m2 = {{'.', 'x', '.'}, {'x', '.', 'x'}, {'.', 'x', 'x'}, {'x', '.', '.'}, {'x', '.', '.'}, {'x', 'x', '.'}};
+        char[][] m2 = { { '.', 'x', '.' }, { 'x', '.', 'x' }, { '.', 'x', 'x' }, { 'x', '.', '.' },
+                { 'x', '.', '.' }, { 'x', 'x', '.' } };
         print(m2);
 
         System.out.println();
@@ -25,7 +26,7 @@ public class MatrixOperations {
 
         System.out.println();
 
-        int[][] m3 = {{1, 1}, {1, 0}};
+        int[][] m3 = { { 1, 1 }, { 1, 0 } };
 
         print(multiply(m3, m3));
 

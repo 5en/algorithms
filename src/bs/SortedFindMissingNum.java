@@ -2,7 +2,7 @@ package bs;
 
 public class SortedFindMissingNum {
     public static void main(String[] args) {
-        find(new int[]{1, 2, 2, 3, 5, 6, 7, 9, 9, 11, 15}, -5, 10);
+        find(new int[] { 1, 2, 2, 3, 5, 6, 7, 9, 9, 11, 15 }, -5, 10);
     }
 
     // a[] is sorted array, find missing elements in [p,q]

@@ -3,9 +3,9 @@ import java.util.List;
 
 public class AllSubsets {
     public static void main(String[] args) {
-        System.out.println(allSubsets(new int[]{}));
-        System.out.println(allSubsets(new int[]{1}));
-        System.out.println(allSubsets(new int[]{1, 2, 3, 4}));
+        System.out.println(allSubsets(new int[] {}));
+        System.out.println(allSubsets(new int[] { 1 }));
+        System.out.println(allSubsets(new int[] { 1, 2, 3, 4 }));
     }
 
     // O(2^N * logN)

@@ -5,7 +5,7 @@ import java.util.Arrays;
 @SuppressWarnings("unused")
 public class HeapSort {
     public static void main(String[] args) {
-        int[] a = {10, 3, 567, 23, 65, 55, 28, 123, 505, 32};
+        int[] a = { 10, 3, 567, 23, 65, 55, 28, 123, 505, 32 };
         System.out.println(Arrays.toString(a));
         HeapSort.sort(a);
         System.out.println(Arrays.toString(a));
@@ -23,7 +23,7 @@ public class HeapSort {
 
     // max-heap
     private static class Heap {
-        public int size; // number of valid elements starting from index 1
+        public int         size;    // number of valid elements starting from index 1
         public final int[] elements;
 
         public Heap(int[] a) {

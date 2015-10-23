@@ -25,7 +25,8 @@ public class RBT {
         System.out.println(tree.root.left.color + " " + tree.root.right.color);
         System.out.println(tree.root.left.left.color + " " + tree.root.left.right.color);
         System.out.println(tree.root.right.left.color + " " + tree.root.right.right.color);
-        System.out.println(tree.root.right.left.left.color + " " + tree.root.right.left.right.color);
+        System.out
+            .println(tree.root.right.left.left.color + " " + tree.root.right.left.right.color);
     }
 
     public static void leftRotate(Tree t, Node x) {
@@ -334,11 +335,12 @@ public class RBT {
         }
     }
 
-    private static interface Null {}
+    private static interface Null {
+    }
 
     private static class Tree {
-        public Node root = Tree.NIL;
-        public static final Node NIL = new NullNode();
+        public Node              root = Tree.NIL;
+        public static final Node NIL  = new NullNode();
 
         private static class NullNode extends Node implements Null {
             public NullNode() {
@@ -348,11 +350,11 @@ public class RBT {
     }
 
     private static class Node {
-        public int key;
+        public int   key;
         public Color color;
-        public Node left = Tree.NIL;
-        public Node right = Tree.NIL;
-        public Node p = Tree.NIL;
+        public Node  left  = Tree.NIL;
+        public Node  right = Tree.NIL;
+        public Node  p     = Tree.NIL;
 
         public Node(int key, Color color) {
             this.key = key;

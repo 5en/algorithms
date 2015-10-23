@@ -10,7 +10,7 @@ import java.util.Set;
 
 public class AllPermutation {
     public static void main(String[] args) {
-        List<Integer> a = new ArrayList<Integer>(Arrays.asList(new Integer[]{1, 2, 3}));
+        List<Integer> a = new ArrayList<Integer>(Arrays.asList(new Integer[] { 1, 2, 3 }));
 
         System.out.println("perm");
         for (List<Integer> perm : perm(a)) {
@@ -61,7 +61,8 @@ public class AllPermutation {
     }
 
     // a[start, a.size()-1]
-    private static Set<List<Integer>> permMemoSR(List<Integer> a, int start, Map<Set<Integer>, Set<List<Integer>>> memo) {
+    private static Set<List<Integer>> permMemoSR(List<Integer> a, int start,
+                                                 Map<Set<Integer>, Set<List<Integer>>> memo) {
         Set<Integer> key = new HashSet<Integer>(a.subList(start, a.size()));
 
         if (memo.containsKey(key)) {

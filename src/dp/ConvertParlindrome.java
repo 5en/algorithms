@@ -63,7 +63,7 @@ public class ConvertParlindrome {
             s2 = s.substring(n / 2 + 1);
         }
 
-        return new String[]{s1, s2};
+        return new String[] { s1, s2 };
     }
 
     // O(N^2)

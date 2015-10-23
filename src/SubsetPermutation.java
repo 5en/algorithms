@@ -26,7 +26,8 @@ public class SubsetPermutation {
     }
 
     // pos = 0...K-1
-    private static void subsetPermutation1Helper(Set<Character> chs, int K, StringBuilder sb, Set<String> result) {
+    private static void subsetPermutation1Helper(Set<Character> chs, int K, StringBuilder sb,
+                                                 Set<String> result) {
         if (sb.length() == K) {
             result.add(sb.toString());
             return;
@@ -47,7 +48,8 @@ public class SubsetPermutation {
     }
 
     // pos = 0...K-1
-    private static void subsetPermutation2Helper(List<Character> chs, int K, StringBuilder sb, Set<String> result) {
+    private static void subsetPermutation2Helper(List<Character> chs, int K, StringBuilder sb,
+                                                 Set<String> result) {
         if (sb.length() == K) {
             result.add(sb.toString());
             return;

@@ -65,7 +65,7 @@ public class LongestRepeatedSubstring {
 
     private static class Suffix {
         public final String s;
-        public final int start;
+        public final int    start;
 
         public Suffix(String s, int start) {
             this.s = s;

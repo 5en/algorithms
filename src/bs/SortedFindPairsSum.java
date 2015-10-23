@@ -2,8 +2,8 @@ package bs;
 
 public class SortedFindPairsSum {
     public static void main(String[] args) {
-        System.out.println(find(new int[]{2, 4, 6, 7, 10, 12, 15}, 10));
-        System.out.println(find(new int[]{-10, -6, -2, 1, 10, 12, 15}, 10));
+        System.out.println(find(new int[] { 2, 4, 6, 7, 10, 12, 15 }, 10));
+        System.out.println(find(new int[] { -10, -6, -2, 1, 10, 12, 15 }, 10));
     }
 
     // O(N*logN)

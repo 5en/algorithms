@@ -25,7 +25,8 @@ public class List2Tree {
 
         System.out.println(root.id);
         System.out.println(root.c.get(0).id + " " + root.c.get(1).id);
-        System.out.println(root.c.get(1).c.get(0).id + " " + root.c.get(1).c.get(1).id + " " + root.c.get(1).c.get(2).id);
+        System.out.println(root.c.get(1).c.get(0).id + " " + root.c.get(1).c.get(1).id + " "
+                           + root.c.get(1).c.get(2).id);
         System.out.println(root.c.get(1).c.get(0).c.get(0).id);
     }
 
@@ -62,8 +63,8 @@ public class List2Tree {
     }
 
     private static class TreeNode {
-        public final int id;
-        public TreeNode p = null;
+        public final int            id;
+        public TreeNode             p = null;
         public final List<TreeNode> c = new ArrayList<TreeNode>();
 
         public TreeNode(int id) {

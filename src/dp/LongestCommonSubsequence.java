@@ -78,7 +78,7 @@ public class LongestCommonSubsequence {
     }
 
     private static class Info {
-        public int maxLen = -1;
-        public Set<List<Character>> seqs = new HashSet<List<Character>>(); // set of sequences
+        public int                  maxLen = -1;
+        public Set<List<Character>> seqs   = new HashSet<List<Character>>(); // set of sequences
     }
 }

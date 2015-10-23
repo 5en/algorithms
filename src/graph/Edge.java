@@ -3,7 +3,7 @@ package graph;
 public class Edge {
     public final Vertex u;
     public final Vertex v;
-    public final int w;
+    public final int    w;
 
     public Edge(Vertex u, Vertex v, int w) {
         this.u = u;

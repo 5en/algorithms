@@ -2,8 +2,8 @@ package bs;
 
 public class TwoSortedFindKth {
     public static void main(String[] args) {
-        int[] a = {1, 2, 3, 5};
-        int[] b = {2, 3, 3, 4};
+        int[] a = { 1, 2, 3, 5 };
+        int[] b = { 2, 3, 3, 4 };
         System.out.println(find(a, b, 1)); // 1
         System.out.println(find(a, b, 2)); // 2
         System.out.println(find(a, b, 3)); // 2
@@ -19,8 +19,8 @@ public class TwoSortedFindKth {
         System.out.println(find2(a, b, 8)); // 5
         System.out.println();
 
-        a = new int[]{1, 2, 3};
-        b = new int[]{2, 4, 5, 6, 7, 8, 8, 9, 10, 10};
+        a = new int[] { 1, 2, 3 };
+        b = new int[] { 2, 4, 5, 6, 7, 8, 8, 9, 10, 10 };
         System.out.println(find(a, b, 10)); // 8
         System.out.println(find(a, b, 3)); // 2
         System.out.println(find(a, b, 4)); // 3
@@ -30,8 +30,8 @@ public class TwoSortedFindKth {
         System.out.println(find2(a, b, 4)); // 3
         System.out.println();
 
-        a = new int[]{1, 2, 3};
-        b = new int[]{4, 4, 5, 6, 7, 8, 8, 9, 10, 10};
+        a = new int[] { 1, 2, 3 };
+        b = new int[] { 4, 4, 5, 6, 7, 8, 8, 9, 10, 10 };
         System.out.println(find(a, b, 10)); // 8
         System.out.println(find(a, b, 3)); // 3
         System.out.println(find(b, a, 5)); // 4
