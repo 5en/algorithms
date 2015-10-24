@@ -1,11 +1,15 @@
 # Eclipse
-bin/
-build/
-.settings/
-.project
-.classpath
+**/bin/
+**/build/
+**/.settings/
+**/.project
+**/.classpath
+**/.springBeans
 
 # IntelliJ IDEA
-.idea/
-out/
-*.iml
+**/.idea/
+**/out/
+**/*.iml
+
+# Maven
+**/target
