@@ -33,7 +33,7 @@ public class KMP {
         return false;
     }
 
-    // O(M*N)
+    // O(M + N)
     // for i = 0,...,M-1, 
     // suppose T[i-q,...,i-1] == P[0...q-1], (q is the length of previously matched)
     // if T[i] == P[q], q++, (if q == N, found!)
