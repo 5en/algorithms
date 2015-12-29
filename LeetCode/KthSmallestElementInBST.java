@@ -3,7 +3,31 @@
 package com.htyleo.algorithms;
 
 public class KthSmallestElementInBST {
+    // in-order traversal
     public int kthSmallest(TreeNode root, int k) {
+        Deque<TreeNode> stack = new ArrayDeque<TreeNode>();
+        stack.push(root);
+        TreeNode node = root;
+        int count = 0;
+        while (!stack.isEmpty()) {
+            while (node != null) {
+                stack.push(node);
+                node = node.left;
+            }
+            
+            node = stack.pop();
+            count++;
+            if (count == k) {
+                return node.val;
+            }
+            
+            node = node.right;
+        }
+        
+        return -1;
+    }
+
+    public int kthSmallest2(TreeNode root, int k) {
         return kthSmallestSR(root, k).result;
     }
 
