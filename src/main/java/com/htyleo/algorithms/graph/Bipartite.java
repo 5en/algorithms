@@ -64,7 +64,7 @@ public class Bipartite {
             // default WHITE, set to GRAY or BLACK
             if (v.color == Color.WHITE) {
                 v.color = Color.GRAY;
-                if (bfsColor(V, v) == false) {
+                if (!bfsColor(V, v)) {
                     return false;
                 }
             }
