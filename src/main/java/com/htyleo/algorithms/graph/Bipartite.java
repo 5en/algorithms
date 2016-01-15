@@ -64,7 +64,7 @@ public class Bipartite {
             // default WHITE, set to GRAY or BLACK
             if (v.color == Color.WHITE) {
                 v.color = Color.GRAY;
-                if (!bfsColor(V, v)) {
+                if (!bfsColor(v)) {
                     return false;
                 }
             }
@@ -73,7 +73,7 @@ public class Bipartite {
         return true;
     }
 
-    private static boolean bfsColor(Set<Vertex> V, Vertex root) {
+    private static boolean bfsColor(Vertex root) {
         // root has been assigned a color
         Queue<Vertex> queue = new LinkedList<Vertex>();
         queue.add(root);
