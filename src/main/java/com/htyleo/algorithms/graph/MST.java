@@ -63,7 +63,7 @@ public class MST {
         }
     }
 
-    // O(|V|+|E|)
+    // O(|V| + |E|log|E|)
     public static Set<Edge> mstKruskal(Set<Vertex> V, Set<Edge> E) {
         // make each vertex its own group
         int setId = 0;
@@ -111,7 +111,7 @@ public class MST {
         return selectedE;
     }
 
-    // O(|V|+|E|)
+    // O(|E| + |V|log|V|)
     public static Set<Edge> mstPrim(Set<Vertex> V, Set<Edge> E) {
         // initial node
         Vertex root = V.iterator().next();
