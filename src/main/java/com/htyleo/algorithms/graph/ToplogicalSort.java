@@ -49,7 +49,7 @@ public class ToplogicalSort {
     public static List<Vertex> tps(List<Vertex> graph) {
         List<Vertex> order = new LinkedList<Vertex>();
         for (Vertex v : graph) {
-            if (dfs(v, order) == false) {
+            if (!dfs(v, order)) {
                 return new LinkedList<Vertex>();
             }
         }
@@ -67,7 +67,7 @@ public class ToplogicalSort {
 
         v.color = Color.GRAY;
         for (Vertex adj : v.adjs.keySet()) {
-            if (dfs(adj, order) == false) {
+            if (!dfs(adj, order)) {
                 return false;
             }
         }
