@@ -9,6 +9,27 @@ import java.util.Set;
 
 public class ShortestPath {
     public static void main(String[] args) {
+        int[][] graph = new int[5][5]; // s(0), t(1), x(2), y(3), z(4)
+        for (int i = 0; i < graph.length; i++) {
+            for (int j = 0; j < graph.length; j++) {
+                graph[i][j] = -1;
+            }
+        }
+        graph[0][1] = 10;
+        graph[0][3] = 5;
+        graph[1][2] = 1;
+        graph[1][3] = 2;
+        graph[2][4] = 4;
+        graph[3][1] = 3;
+        graph[3][2] = 9;
+        graph[3][4] = 2;
+        graph[4][0] = 7;
+        graph[4][2] = 6;
+        System.out.println("Dijkstra");
+        System.out.println("dist(s,z) = " + dijkstra(graph, 0, 4));
+
+        System.out.println();
+
         Map<String, Vertex> VMap = new HashMap<String, Vertex>();
         VMap.put("s", new Vertex("s"));
         VMap.put("t", new Vertex("t"));
@@ -40,27 +61,6 @@ public class ShortestPath {
         System.out.println("dist(s,x) = " + VMap.get("x").dist);
         System.out.println("dist(s,y) = " + VMap.get("y").dist);
         System.out.println("dist(s,z) = " + VMap.get("z").dist);
-
-        System.out.println();
-
-        int[][] graph = new int[5][5]; // s(0), t(1), x(2), y(3), z(4)
-        for (int i = 0; i < graph.length; i++) {
-            for (int j = 0; j < graph.length; j++) {
-                graph[i][j] = -1;
-            }
-        }
-        graph[0][1] = 10;
-        graph[0][3] = 5;
-        graph[1][2] = 1;
-        graph[1][3] = 2;
-        graph[2][4] = 4;
-        graph[3][1] = 3;
-        graph[3][2] = 9;
-        graph[3][4] = 2;
-        graph[4][0] = 7;
-        graph[4][2] = 6;
-        System.out.println("Dijkstra");
-        System.out.println("dist(s,z) = " + dijkstra(graph, 0, 4));
     }
 
     // O(|E| + |V|*log|V|)
@@ -71,11 +71,8 @@ public class ShortestPath {
         Set<Integer> Q = new HashSet<Integer>();
 
         int[] dist = new int[V];
-        dist[from] = 0;
         for (int i = 0; i < V; i++) {
-            if (i != from) {
-                dist[i] = -1;
-            }
+            dist[i] = (from == i) ? 0 : -1;
             Q.add(i);
         }
 
@@ -165,7 +162,7 @@ public class ShortestPath {
             Vertex u = e.u;
             Vertex v = e.v;
             if (u.dist + e.w < v.dist) {
-                // indicate negative weights
+                // indicate negative cycle
                 return false;
             }
         }
