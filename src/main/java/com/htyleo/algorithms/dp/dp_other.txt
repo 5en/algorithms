@@ -14,3 +14,4 @@ LeetCode Decode Ways
 LeetCode Unique Binary Search Trees
 LeetCode Best Time to Buy and Sell Stock with Cooldown
 LeetCode Different Ways to Add Parentheses
+LeetCode Perfect Squares
