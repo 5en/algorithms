@@ -11,3 +11,4 @@ LeetCode Number of Islands
 LeetCode Letter Combinations of a Phone Number
 LeetCode Generate Parentheses
 LeetCode Surrounded Regions
+LeetCode Longest Increasing Path in a Matrix
