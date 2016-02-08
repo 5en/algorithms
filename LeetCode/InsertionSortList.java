@@ -28,7 +28,7 @@ public class InsertionSortList {
         prev.next = node;
     }
 
-    public class ListNode {
+    private static class ListNode {
         int      val;
         ListNode next;
 
