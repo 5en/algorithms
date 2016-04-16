@@ -2,12 +2,18 @@
 
 package com.htyleo.algorithms;
 
-import java.util.Arrays;
+import java.util.ArrayList;
+import java.util.HashSet;
+import java.util.LinkedHashMap;
+import java.util.List;
+import java.util.Map;
+import java.util.Set;
 
 public class RemoveDuplicateLetters {
     // https://leetcode.com/discuss/73777/easy-to-understand-iterative-java-solution
     //
-    //    The basic idea is to find out the smallest result letter by letter (one letter at a time). Here is the thinking process for input "cbacdcbc":
+    //    The basic idea is to find out the smallest result letter by letter (one letter at a time).
+    //    Here is the thinking process for input "cbacdcbc":
     //
     //    1. find out the last appeared position for each letter; c - 7 b - 6 a - 2 d - 4
     //    2. find out the smallest index from the map in step 1 (a - 2);
@@ -21,70 +27,71 @@ public class RemoveDuplicateLetters {
     //    so the result is "acdb"
     //
     //    Notes:
-    //
     //    1. After one letter is determined in step 3, it need to be removed from the "last appeared position map", and the same letter should be ignored in the following steps
-    //    2. In step 3, the beginning index of the search range should be the index of previous determined letter plus one
+    //    2. In step 2, choose the one with the smallest index when there is a tie
+    //    3. In step 3, the beginning index of the search range should be the index of previous determined letter plus one
 
+    // O(N)
     public String removeDuplicateLetters(String s) {
-        int N = s.length();
-
-        // numlastIdx[n] = i: the last index of character ('a'+n) is i
-        int[] numlastIdx = new int[26];
-        Arrays.fill(numlastIdx, -1);
-
-        // isLastIdx[i]: whether i is the last index of some character
-        boolean[] isLastIdx = new boolean[N];
-
-        // preprocess
-        for (int i = 0; i < N; i++) {
+        // char -> last index
+        // larger index comes first
+        Map<Character, Integer> lastIdx = new LinkedHashMap<Character, Integer>();
+        for (int i = s.length() - 1; i >= 0; i--) {
             char ch = s.charAt(i);
-
-            // clear old lastIdx
-            int lastIdx = numlastIdx[ch - 'a'];
-            if (lastIdx != -1) {
-                isLastIdx[lastIdx] = false;
-            }
-
-            // set new lastIdx
-            numlastIdx[ch - 'a'] = i;
-            isLastIdx[i] = true;
-        }
-
-        // remove duplicates
-        boolean[] processed = new boolean[26];
-        StringBuilder result = new StringBuilder();
-        for (int i = 0, start = 0; i < N;) {
-            if (processed[s.charAt(i) - 'a'] || !isLastIdx[i]) {
-                i++;
+            if (lastIdx.containsKey(ch)) {
                 continue;
             }
 
-            int minIdx = findMinIdx(s, processed, start, i);
-            char min = s.charAt(minIdx);
-            result.append(min);
-            processed[min - 'a'] = true;
+            lastIdx.put(ch, i);
+        }
 
-            start = minIdx + 1;
-            while (start > i) {
-                i++;
+        StringBuilder result = new StringBuilder();
+
+        List<Map.Entry<Character, Integer>> lastIdxList = new ArrayList<Map.Entry<Character, Integer>>(
+            lastIdx.entrySet());
+        Set<Character> picked = new HashSet<Character>();
+        int lb = 0;
+        for (int i = lastIdxList.size() - 1; i >= 0; i--) {
+            Map.Entry<Character, Integer> entry = lastIdxList.get(i);
+            char ch = entry.getKey();
+            int ub = entry.getValue();
+            if (picked.contains(ch)) {
+                continue;
+            }
+
+            while (true) {
+                int minChIdx = findMinChar(picked, s, lb, ub);
+                char minChar = s.charAt(minChIdx);
+                picked.add(minChar);
+                result.append(minChar);
+                lb = minChIdx + 1;
+
+                if (minChar == ch) {
+                    break;
+                }
             }
         }
 
         return result.toString();
     }
 
-    private int findMinIdx(String s, boolean[] processed, int start, int end) {
-        int minIdx = end;
-        char min = s.charAt(minIdx);
+    // find the smallest char (choose the one with the smallest index when there is a tie)
+    private int findMinChar(Set<Character> picked, String s, int lb, int ub) {
+        int minChIdx = ub;
+        char minCh = s.charAt(ub);
 
-        for (int i = end - 1; i >= start; i--) {
+        for (int i = ub - 1; i >= lb; i--) {
             char ch = s.charAt(i);
-            if (!processed[ch - 'a'] && ch <= min) {
-                minIdx = i;
-                min = ch;
+            if (picked.contains(ch)) {
+                continue;
+            }
+
+            if (ch <= minCh) {
+                minCh = ch;
+                minChIdx = i;
             }
         }
 
-        return minIdx;
+        return minChIdx;
     }
 }
