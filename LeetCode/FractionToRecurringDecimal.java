@@ -4,6 +4,10 @@ import java.util.HashMap;
 import java.util.Map;
 
 public class FractionToRecurringDecimal {
+
+    // store remainder -> current result length (where the "(" will be placed)
+    // result.append(remainder * 10 / denominator)
+    // remainder = remainder * 10 / denominator
     public String fractionToDecimal(int numerator, int denominator) {
         StringBuilder result = new StringBuilder();
 
@@ -13,8 +17,8 @@ public class FractionToRecurringDecimal {
         }
         result.append(sign);
 
-        long num = Math.abs((long)numerator);
-        long den = Math.abs((long)denominator);
+        long num = Math.abs((long) numerator);
+        long den = Math.abs((long) denominator);
 
         long quotient = num / den;
         result.append(quotient);
