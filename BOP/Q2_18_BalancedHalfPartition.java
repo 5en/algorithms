@@ -6,7 +6,7 @@ import java.util.Set;
 
 public class Q2_18_BalancedHalfPartition {
     public static void main(String[] args) {
-        int[] a = {1, 5, 7, 8, 9, 6, 3, 11, 20, 17};
+        int[] a = { 1, 5, 7, 8, 9, 6, 3, 11, 20, 17 };
         System.out.println(Arrays.toString(partition(a)));
         System.out.println(Arrays.toString(partition2(a)));
     }
@@ -38,7 +38,7 @@ public class Q2_18_BalancedHalfPartition {
         for (int x : a) {
             totalSum += x;
         }
-        int halfTotalSum = totalSum / 2;
+        int halfTotalSum = totalSum % 2 == 0 ? totalSum / 2 : totalSum / 2 + 1;
 
         int maxSumLEHalfTotalSum = Integer.MIN_VALUE;
         for (int sum : S.get(halfN)) {
@@ -47,7 +47,7 @@ public class Q2_18_BalancedHalfPartition {
             }
         }
 
-        return new int[]{maxSumLEHalfTotalSum, totalSum - maxSumLEHalfTotalSum};
+        return new int[] { maxSumLEHalfTotalSum, totalSum - maxSumLEHalfTotalSum };
     }
 
     // O(N^2*halfTotalSum)
@@ -80,10 +80,10 @@ public class Q2_18_BalancedHalfPartition {
 
         for (int v = halfTotalSum; v >= 0; v--) {
             if (isOK[halfN][v]) {
-                return new int[]{v, totalSum - v};
+                return new int[] { v, totalSum - v };
             }
         }
 
-        return new int[]{-1, -1};
+        return new int[] { -1, -1 };
     }
 }
