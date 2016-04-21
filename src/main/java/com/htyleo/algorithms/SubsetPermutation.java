@@ -68,11 +68,22 @@ public class SubsetPermutation {
         }
     }
 
+    // 000
+    // 001
+    // 002
+    // 010
+    // 011
+    // 012
+    // 020
+    // 021
+    // 022
+    // 100
+    // ...
     public static Set<String> subsetPermutation3(Set<Character> chs, int K) {
         Set<String> result = new HashSet<String>();
         List<Character> chsList = new ArrayList<Character>(chs);
         int N = chsList.size();
-        int[] ks = new int[K]; // 0, ..., N-1
+        int[] ks = new int[K]; // ks[i] in {0, 1, ..., N-1}
 
         while (ks[0] < N) {
             StringBuilder sb = new StringBuilder();
