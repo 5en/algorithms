@@ -11,3 +11,5 @@ LeetCode Merge Sorted Array
 LeetCode 3Sum
 LeetCode 3Sum Closest
 LeetCode Sort List
+Google Number of Following Large Elements
+Google Subarray Sum in Range

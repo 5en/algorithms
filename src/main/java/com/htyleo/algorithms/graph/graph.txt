@@ -1,0 +1,197 @@
+****** Shortest Path
+
+Lemma 24.1 (Subpaths of shortest paths are shortest paths)
+G = (V, E)
+let p = <v0, v1, ..., vk> be a shortest path,
+for any i,j: 0 <= i <= j <= k, let pij = <vi, v(i+1), ..., vj> be the subpath,
+Then pij is a shortest path from vi to vj.
+
+Proof: (cut-and-paste)
+Suppose pij is not a shortest path, we can use a shortest path from vi to vj to replace pij in p,
+so that p is not a shortest path => contradiction.
+
+
+
+****** Bellman-Ford algorithm (no negative-weight cycle)
+==============================
+BELLMAN-FORD(G, w, s) // O(VE)
+INITIALIZE-SINGLE-SOURCE(G, s) // O(V)
+for i = 1 to |G.V|-1 // O(V)
+    for each edge (u, v) in G.E // O(E)
+        RELAX(u, v, w)
+
+for each edge (u, v) in G.E
+    if v.d > u.d + w(u, v)
+        return false
+
+return true
+==============================
+
+Proof of correctness:
+If there are no negative-weight cycles, the algorithm computes correct shortest-path weights for all vertices reachable from the source.
+
+Lemma 24.2
+Assume that G = (V, E) contains no negative-weight cycles that are reachable from s.
+Then, after the |V|-1 iterations of the for loop of lines 2–4 of BELLMAN-FORD,
+we have v.d = delta(s, v) (i.e. min or infinity) for all vertices that are reachable from s.
+
+Proof:
+Consider any vertex v that is reachable from s, and let p = <v0, v1, ..., vk>, where v0 = s, vk = v be any shortest path from s to v.
+Because shortest paths are simple, p has at most |V|-1 edges, and so k <= |V|-1.
+Each of the |V|-1 iterations of the for loop of lines 2–4 relaxes all |E| edges.
+Among the edges relaxed in the ith iteration, for i = 1,2,...,k is (vi-1, vi).
+By the path-relaxation property, therefore, v.d = vk.d = delta(s, vk) = delta(s, v).
+
+Theorem 24.4 (Correctness of the Bellman-Ford algorithm)
+If G does contain a negative-weight cycle reachable from s, then the algorithm returns FALSE.
+
+Proof:
+let this cycle be <v0, v1, ..., vk>, v0 = vk. Then sum{w(v(i-1), vi)} < 0.
+Suppose the algorithm returns TRUE, then vi.d <= v(i-1).d + w(v(i-1), vi) for i = 1,2,...,k.
+=> sum{vi.d} <= sum{v(i-1).d} + sum{w(v(i-1), vi)}
+=> 0 <= sum{w(v(i-1), vi)}
+=> contradiction
+
+
+
+****** Single-source shortest paths in directed acyclic graphs (acyclic)
+==============================
+DAG-SHORTEST-PATHS (G, w, s) // O(V + E)
+topologically sort the vertices of G // O(V + E)
+INITIALIZE-SINGLE-SOURCE(G, s)
+for each vertex u, taken in topologically sorted order
+    for each vertex v in G.Adj[u]
+        RELAX(u, v, w)
+==============================
+
+
+
+****** Dijkstra’s algorithm (all edge weights should be non-negative)
+==============================
+DIJKSTRA(G, w, s) // O((V+E)*logV) = O(E*logV)
+INITIALIZE-SINGLE-SOURCE(G, s)
+S = empty
+Q = G.V
+while Q != empty // |V| loops
+    u = EXTRACT-MIN(Q) // O(logV)
+    S = S union {u}
+    for each vertex v in G.Adj[u]
+        RELAX(u, v, w) // totally |E| operations
+==============================
+
+Theorem 24.6 (Correctness of Dijkstra’s algorithm)
+
+Proof:
+Loop invariant: At the start of each iteration of the while loop, v.d = delta(s, v) (i.e. min or infinity) for each vertex v in S.
+
+Initialization: Initially, S = empty, and so the invariant is trivially true.
+
+Maintenance: For the purpose of contradiction, let u be the first vertex for which u.d != delta(s, u) when it is added to set S.
+We must have u != s, and S != empty just before u is added to S.
+There must be a shortest path p from s to u.
+Prior to adding u to S, p can be decomposed into <s, p1, x, y, p2, u>, where x in S, y in G.V - S.
+We claim that y.d = delta(s, y) when u was added to S.
+    To prove this, observe that x in S, => x.d = delta(s, v).
+    Since (u, v) is relaxed at that time. After relaxing, y.d <= x.d + w(x, y) = delta(s, x) + w(x, y) = delta(s, y)
+    Since y.d >= delta(s, y)
+    => y.d = delta(s, y)
+We have y.d = delta(s, y) <= delta(s, u) <= u.d
+But because both y and u are in G.V - S when u was chosen, => u.d <= y.d
+=> u.d = delta(s, u) => contradiction
+
+Termination: Q = empty, S = V.
+
+
+
+==============================
+INITIALIZE-SINGLE-SOURCE(G, s)
+for each vertex v in G.v
+    v.d = infinity
+    v.prev = null
+s.d = 0
+==============================
+
+==============================
+RELAX(u, v, w)
+if v.d > u.d + w(u, v)
+    v.d = u.d + w(u, v)
+    v.prev = u
+==============================
+
+
+
+
+
+****** Minimum Spanning Tree
+
+Loop invariant: Prior to each iteration, A is a subset of some minimum spanning tree.
+
+==============================
+GENERIC-MST(G, w)
+A = empty
+while (A does not form a spanning tree) {
+    find an edge (u, v) that is safe for A
+    A = A union {(u,v)}
+}
+return A
+==============================
+
+Initialization: After line 1, the set A trivially satisfies the loop invariant.
+
+Maintenance: The loop in lines 2–4 maintains the invariant by adding only safe edges.
+
+Termination: All edges added to A are in a minimum spanning tree, and so the set A returned in line 5 must be a minimum spanning tree.
+
+
+Theorem 23.1
+Let G=(V, E) be a connected, undirected graph with a real-valued weight function w defined on E.
+Let A be a subset of E that is included in some minimum spanning tree for G, let (S, V-S) be any cut of G that respects A, (i.e. no edge in A cross the cut)
+and let (u, v) be a light edge crossing (S, V-S) Then, edge (u, v) is safe for A.
+
+Proof
+Let T be a minimum spanning tree that includes A, and assume that T does not contain the light edge (u, v), since if it does, we are done.
+We shall construct another minimum spanning tree T' that includes A union {(u, v)} by using a cut-and-paste technique,
+thereby showing that (u, v) is a safe edge for A.
+
+
+Corollary 23.2
+Let G=(V, E) be a connected, undirected graph with a real-valued weight function w defined on E.
+Let A be a subset of E that is included in some minimum spanning tree for G,
+and let C = (Vc, Ec) be a connected component (tree) in the forest GA = (V, A).
+If (u, v) is a light edge connecting C to some other component in GA, then (u, v) is safe for A.
+
+Proof
+The cut (Vc, V - Vc) respects A, and (u, v) is a light edge for this cut. Therefore, (u, v) is safe for A.
+
+
+==============================
+MST-KRUSKAL(G, w) // O(ElogE) = O(ElogV) (since |V|-1 <= E < |V|^2)
+A = empty
+for each vertex v in G.V
+    MAKE-SET(v)
+sort the edges of G.E into nondecreasing order by weight w
+for each edge (u, v) in G.E, taking in nondescreasing order by weight
+    if FIND-SET(u) != FIND-SET(v)
+        A = A union {(u, v)}
+        UNION(u, v)
+return A
+==============================
+
+
+
+==============================
+MST-PRIM(G, w, r) (r: root) // O(VlogV) (EXTRACT-MIN) + O(ElogV) (2|E| adjacent list) = O(ElogV)
+for each u in G.V
+    u.key = infinity // minimum distance from this vertex to a vertex in Q
+    u.prev = null
+r.key = 0;
+Q = G.V
+while (Q.isNotEmpty) {
+    u = EXTRACT-MIN(Q)
+    for each v adjacent to u:
+        if (v in Q && w(u, v) < v.key) {
+            v.key = w(u, v)
+            v.prev = u
+        }
+}
+==============================
