@@ -1,3 +1,6 @@
+// http://jakeboxer.com/blog/2009/12/13/the-knuth-morris-pratt-algorithm-in-my-own-words/
+// http://blog.jobbole.com/90576/
+//
 // text T[0...M-1]
 // pattern P[0...N-1] (M >= N)
 
