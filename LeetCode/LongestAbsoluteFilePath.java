@@ -1,6 +1,6 @@
 // https://leetcode.com/contest/1/problems/longest-absolute-file-path/
 
-package com.htyleo.algorithms.misc;
+package com.htyleo.algorithms;
 
 import java.util.HashMap;
 import java.util.Map;
