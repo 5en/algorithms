@@ -8,3 +8,4 @@ LeetCode Find Minimum in Rotated Sorted Array
 LeetCode Search in Rotated Sorted Array (II)
 LeetCode Sqrt(x)
 Hulu 2016 Sorted array in range
+LeetCode Valid Perfect Square
