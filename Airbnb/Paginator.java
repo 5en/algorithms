@@ -2,6 +2,9 @@ package com.htyleo.algorithms;
 
 import java.util.Arrays;
 import java.util.HashSet;
+import java.util.LinkedList;
+import java.util.List;
+import java.util.ListIterator;
 import java.util.Set;
 
 public class Paginator {
@@ -15,59 +18,53 @@ public class Paginator {
         System.out.println(Arrays.toString(paginate(5, results)));
     }
 
+    // order by score
+    // no same hostId in the same page
     public static String[] paginate(int num, String[] results) {
         int N = results.length;
         if (N == 0) {
             return new String[0];
         }
 
-        Entry[] entries = new Entry[N];
-        for (int i = 0; i < results.length; i++) {
-            String result = results[i];
+        List<Entry> entries = new LinkedList<>();
+        for (String result : results) {
             String[] items = result.split(",");
-            entries[i] = new Entry(Integer.parseInt(items[0]), Float.parseFloat(items[2]), result);
+            entries.add(new Entry(Integer.parseInt(items[0]), result));
         }
 
         String[] paginatedResults = new String[results.length + (results.length - 1) / num];
 
-        boolean[] used = new boolean[N];
         Set<Integer> hostIds = new HashSet<>(num);
-        boolean scanned = false;
-        int entryCount = 0;
-        for (int curr = 0, ri = 0; ri < paginatedResults.length; curr++) {
-            if (curr == N) {
-                scanned = true;
-                curr = 0;
-            }
+        boolean reachEnd = false;
+        for (int ri = 0, count = 0; !entries.isEmpty();) {
+            for (ListIterator<Entry> it = entries.listIterator(); it.hasNext();) {
+                Entry entry = it.next();
 
-            if (used[curr]) {
-                curr++;
-                continue;
-            }
-
-            Entry entry = entries[curr];
-
-            if (scanned) {
-                paginatedResults[ri++] = entry.result;
-
-                entryCount++;
-                if (entryCount % num == 0 && entryCount != N) {
-                    paginatedResults[ri++] = "";
+                if (reachEnd) {
+                    paginatedResults[ri++] = entry.result;
+                    if ((++count % num == 0) && ri < paginatedResults.length) {
+                        paginatedResults[ri++] = "";
+                    }
+                    it.remove();
+                    continue;
                 }
 
-            } else {
-                paginatedResults[ri++] = entry.result;
-                used[curr] = true;
-
-                entryCount++;
-                if (entryCount % num == 0 && entryCount != N) {
-                    paginatedResults[ri++] = "";
+                if (!hostIds.contains(entry.hostId)) {
+                    hostIds.add(entry.hostId);
+                    paginatedResults[ri++] = entry.result;
+                    if ((++count % num == 0) && ri < paginatedResults.length) {
+                        paginatedResults[ri++] = "";
+                    }
+                    it.remove();
                 }
 
-                hostIds.add(entry.hostId);
+                if (!it.hasNext()) {
+                    reachEnd = true;
+                }
+
                 if (hostIds.size() == num) {
                     hostIds.clear();
-                    curr = 0;
+                    break;
                 }
             }
         }
@@ -77,12 +74,10 @@ public class Paginator {
 
     public static class Entry {
         public final int    hostId;
-        public final float  score;
         public final String result;
 
-        public Entry(int hostId, float score, String result) {
+        public Entry(int hostId, String result) {
             this.hostId = hostId;
-            this.score = score;
             this.result = result;
         }
     }
