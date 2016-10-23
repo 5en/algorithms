@@ -1,78 +1,99 @@
-package com.htyleo.algorithms;
+// https://leetcode.com/problems/lru-cache/
 
 import java.util.HashMap;
 import java.util.Map;
 
 public class LRUCache {
-    Map<Integer, Node> pageNum2Node = new HashMap<Integer, Node>();
-    Node               head;
-    Node               tail;
-    final int          CAPACITY     = 100;
 
-    public Page get(int pageNum) {
-        if (pageNum2Node.containsKey(pageNum)) {
-            Node curr = pageNum2Node.get(pageNum);
+    private final int          capacity;
+    private Map<Integer, Node> key2Node = new HashMap<>();
+    private Node               head;
+    private Node               tail;
 
-            // remove curr
-            Node currPrev = curr.prev;
-            Node currNext = curr.next;
-            if (currPrev != null) {
-                currPrev.next = currNext;
-            }
-            if (currNext != null) {
-                currNext.prev = currPrev;
-            }
+    private static class Node {
+        int  key;
+        int  value;
+        Node prev;
+        Node next;
 
-            // add node to head
-            addToHead(curr);
-
-            return curr.page;
+        public Node(int key, int value) {
+            this.key = key;
+            this.value = value;
         }
-
-        if (pageNum2Node.size() == CAPACITY) {
-            Node tailPrev = tail.prev;
-            tailPrev.next = null;
-
-            tail.prev = null;
-            pageNum2Node.remove(tail.pageNum);
-        }
-
-        Page page = getPageFromMem(pageNum);
-        Node newNode = new Node(pageNum, page);
-        addToHead(newNode);
-
-        return page;
     }
 
-    private void addToHead(Node curr) {
-        // add curr to head
-        curr.prev = null;
-        curr.next = head;
+    public LRUCache(int capacity) {
+        this.capacity = capacity;
+    }
 
-        if (head != null) {
-            head.prev = curr;
+    public int get(int key) {
+        if (!key2Node.containsKey(key)) {
+            return -1;
+        }
+
+        Node node = key2Node.get(key);
+        removeNode(node);
+        addToHead(node);
+
+        return node.value;
+    }
+
+    public void set(int key, int value) {
+        Node node = key2Node.get(key);
+        if (node != null) {
+            // the node corresponding to this key exists
+            node.value = value;
+            removeNode(node);
+            addToHead(node);
+            return;
+        }
+
+        // the node corresponding to this key does not exist
+        if (key2Node.size() == capacity) {
+            removeNode(tail);
+        }
+        node = new Node(key, value);
+        addToHead(node);
+    }
+
+    private void removeNode(Node node) {
+        if (node == null) {
+            return;
+        }
+
+        Node prevNode = node.prev;
+        Node nextNode = node.next;
+
+        if (prevNode != null) {
+            prevNode.next = nextNode;
         } else {
-            tail = curr;
+            // prevNode == null => node is the head
+            head = node.next;
         }
-        head = curr;
+
+        if (nextNode != null) {
+            nextNode.prev = prevNode;
+        } else {
+            // nextNode == null => node is the tail
+            tail = node.prev;
+        }
+
+        key2Node.remove(node.key);
     }
 
-    private Page getPageFromMem(int pageNum) {
-        return null;
+    private void addToHead(Node node) {
+        if (head != null) {
+            head.prev = node;
+        } else {
+            // head == null => empty
+            tail = node;
+        }
+
+        node.prev = null;
+        node.next = head;
+        head = node;
+
+        key2Node.put(node.key, node);
     }
-}
 
-class Node {
-    int  pageNum;
-    Page page;
-    Node prev;
-    Node next;
-
-    public Node(int pageNum, Page page) {
-        this.pageNum = pageNum;
-        this.page = page;
-    }
-}
-
-class Page {
 }
