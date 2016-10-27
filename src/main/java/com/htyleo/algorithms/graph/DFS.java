@@ -36,7 +36,8 @@ public class DFS {
 
         u.d = Vertex.time;
         u.color = Color.GRAY;
-        System.out.println(u + ":" + u.d + ":" + u.color);
+
+        System.out.println("START: " + u + "-" + u.color + "-" + u.d);
 
         for (Vertex v : u.adjs.keySet()) {
             if (v.color == Color.WHITE) {
@@ -47,6 +48,7 @@ public class DFS {
 
         u.f = Vertex.time;
         u.color = Color.BALCK;
-        System.out.println(u + ":" + u.f + ":" + u.color);
+
+        System.out.println("END: " + u + "-" + u.color + "-" + u.f);
     }
 }

@@ -30,28 +30,38 @@ public class BFS {
     // O(|V|+|E|)
     public static void bfs(Vertex source) {
         source.color = Color.GRAY;
-        System.out.println(source + ":" + source.color);
         source.prev = null;
         source.dist = 0;
 
-        Queue<Vertex> Q = new LinkedList<Vertex>();
+        Queue<Vertex> Q = new LinkedList<>();
         Q.add(source);
+        Queue<Vertex> auxQ = new LinkedList<>();
 
         while (!Q.isEmpty()) {
-            Vertex u = Q.remove();
-            for (Vertex v : u.adjs.keySet()) {
-                if (v.color == Color.WHITE) {
-                    // v has not been accessed
-                    v.color = Color.GRAY;
-                    System.out.println(v + ":" + v.color);
-                    v.dist = u.dist + 1;
-                    v.prev = u;
+            while (!Q.isEmpty()) {
+                Vertex u = Q.remove();
+                System.out.println("START: " + u + "-" + u.color);
 
-                    Q.add(v);
+                for (Vertex v : u.adjs.keySet()) {
+                    if (v.color == Color.WHITE) {
+                        // v has not been accessed
+                        v.color = Color.GRAY;
+                        v.dist = u.dist + 1;
+                        v.prev = u;
+
+                        System.out.println("ENQUEUE: " + v + "-" + v.color);
+
+                        auxQ.add(v);
+                    }
                 }
+
+                u.color = Color.BALCK;
+                System.out.println("END: " + u + "-" + u.color);
             }
-            u.color = Color.BALCK;
-            System.out.println(u + ":" + u.color);
+
+            Queue<Vertex> tmpQ = Q;
+            Q = auxQ;
+            auxQ = tmpQ;
         }
     }
 }
