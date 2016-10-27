@@ -1,53 +1,54 @@
 // https://leetcode.com/problems/min-stack/
 
-import java.util.ArrayList;
-import java.util.List;
+package com.htyleo.algorithms;
+
+import java.util.Deque;
+import java.util.LinkedList;
 
 public class MinStack {
-    private int topIdx = -1;
-    private List<Integer> items = new ArrayList<Integer>();
 
-    private int minIdx = -1;
-    private List<Integer> nextMin = new ArrayList<Integer>();
+    private Node        min;
+    private Deque<Node> stack = new LinkedList<Node>();
+
+    private static class Node {
+        public int  val;
+        public Node nextMin; // point to the min Node below this node
+
+        public Node(int val, Node nextMin) {
+            this.val = val;
+            this.nextMin = nextMin;
+        }
+    }
 
     public void push(int x) {
-        topIdx++;
-        if (items.size() < topIdx + 1) {
-            items.add(0);
-            nextMin.add(-1);
-        }
+        Node node = new Node(x, min);
+        stack.push(node);
 
-        items.set(topIdx, x);
-
-        if (minIdx == -1) {
-            nextMin.set(topIdx, -1);
-            minIdx = topIdx;
-        } else {
-            if (x < items.get(minIdx)) {
-                nextMin.set(topIdx, minIdx);
-                minIdx = topIdx;
-            } else {
-                nextMin.set(topIdx, -1);
-            }
+        if (min == null || node.val < min.val) {
+            min = node;
         }
     }
 
     public void pop() {
-        items.set(topIdx, null);
-
-        if (nextMin.get(topIdx) != -1) {
-            minIdx = nextMin.get(topIdx);
-        }
-        nextMin.set(topIdx, null);
-
-        topIdx--;
+        Node node = stack.pop();
+        min = node.nextMin;
     }
 
     public int top() {
-        return items.get(topIdx);
+        return stack.peek().val;
     }
 
     public int getMin() {
-        return items.get(minIdx);
+        return min.val;
     }
+
 }
+
+/**
+ * Your MinStack object will be instantiated and called as such:
+ * MinStack obj = new MinStack();
+ * obj.push(x);
+ * obj.pop();
+ * int param_3 = obj.top();
+ * int param_4 = obj.getMin();
+ */
