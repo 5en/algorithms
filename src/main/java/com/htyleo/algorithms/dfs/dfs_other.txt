@@ -13,6 +13,7 @@ LeetCode Generate Parentheses
 LeetCode Surrounded Regions
 LeetCode Longest Increasing Path in a Matrix
 LeetCode Subsets II
-Google Lottery Ticket
 LeetCode Remove Invalid Parentheses
+LeetCode N-Queens
+Google Lottery Ticket
 Google Swap Couples
