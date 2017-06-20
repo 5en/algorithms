@@ -15,5 +15,6 @@ LeetCode Longest Increasing Path in a Matrix
 LeetCode Subsets II
 LeetCode Remove Invalid Parentheses
 LeetCode N-Queens
+LeetCode Increasing Subsequences
 Google Lottery Ticket
 Google Swap Couples
