@@ -1,87 +1,54 @@
-// https://leetcode.com/contest/1/problems/longest-absolute-file-path/
+// https://leetcode.com/problems/longest-absolute-file-path/#/description
 
 package com.htyleo.algorithms;
 
-import java.util.HashMap;
-import java.util.Map;
+import java.util.Stack;
 
+/**
+ * Created by htyleo on 6/24/17.
+ */
 public class LongestAbsoluteFilePath {
 
-    // O(N) time
-    public int lengthLongestPath(String input) {
-        int maxLen = 0;
-        Map<Integer, Integer> cumuLens = new HashMap<Integer, Integer>();
+  public int lengthLongestPath(String input) {
+    int maxLen = 0;
 
-        StringParser sp = new StringParser(input);
-        Element element = null;
-        while ((element = sp.next()) != null) {
-            int level = element.level;
-            int len = element.name.length();
-            if (element.isFile) {
-                if (level == 0) {
-                    maxLen = Math.max(maxLen, len);
-                } else {
-                    maxLen = Math.max(maxLen, cumuLens.get(level - 1) + len);
-                }
-            } else {
-                // dir, len + 1 because of '/'
-                if (level == 0) {
-                    cumuLens.put(0, len + 1);
-                } else {
-                    cumuLens.put(level, cumuLens.get(level - 1) + len + 1);
-                }
-            }
-        }
+    // length of dir1/dir2/.../dirn/
+    int prevLen = 0;
+    Stack<Integer> dirs = new Stack<>();
+    String[] items = input.split("\n");
 
-        return maxLen;
+    for (String item : items) {
+      int level = calLevel(item);
+      while (dirs.size() > level) {
+        prevLen -= dirs.pop();
+      }
+
+      if (isFile(item)) {
+        maxLen = Math.max(maxLen, prevLen + item.length() - level);
+      } else {
+        // item is directory
+        dirs.push(item.length() - level + 1);
+        prevLen += item.length() - level + 1;
+      }
     }
 
-    private static class StringParser {
-        private final String input;
+    return maxLen;
+  }
 
-        private int          startIdx = 0;
+  private boolean isFile(String s) {
+    return s.contains(".");
+  }
 
-        public StringParser(String input) {
-            this.input = input;
-        }
-
-        public Element next() {
-            if (startIdx == input.length()) {
-                return null;
-            }
-
-            int level = 0;
-            if (startIdx != 0) {
-                // skip \n, level = # of \t
-                startIdx++;
-                while (input.charAt(startIdx) == '\t') {
-                    level++;
-                    startIdx++;
-                }
-            }
-            int endIdx = input.indexOf("\n", startIdx);
-            if (endIdx == -1) {
-                endIdx = input.length();
-            }
-
-            String name = input.substring(startIdx, endIdx);
-            boolean isFile = name.contains(".");
-
-            startIdx = endIdx;
-
-            return new Element(name, level, isFile);
-        }
+  private int calLevel(String s) {
+    int res = 0;
+    for (int i = 0; i < s.length(); i++) {
+      if (s.charAt(i) == '\t') {
+        res++;
+      } else {
+        break;
+      }
     }
 
-    private static class Element {
-        public final String  name;
-        public final int     level;
-        public final boolean isFile;
-
-        public Element(String name, int level, boolean isFile) {
-            this.name = name;
-            this.level = level;
-            this.isFile = isFile;
-        }
-    }
+    return res;
+  }
 }
