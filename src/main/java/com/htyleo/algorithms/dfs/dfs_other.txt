@@ -18,5 +18,6 @@ LeetCode N-Queens
 LeetCode Increasing Subsequences
 LeetCode Matchsticks to Square
 LeetCode Reconstruct Itinerary
+LeetCode Restore IP Addresses
 Google Lottery Ticket
 Google Swap Couples
