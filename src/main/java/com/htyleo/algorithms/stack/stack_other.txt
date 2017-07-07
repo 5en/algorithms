@@ -1,3 +1,4 @@
 LeetCode Add Two Numbers II
 LeetCode Next Greater Element II
 LeetCode 132 Pattern
+LeetCode 71. Simplify Path
